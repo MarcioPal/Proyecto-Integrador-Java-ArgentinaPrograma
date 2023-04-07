@@ -8,6 +8,7 @@ package com.mycompany.proy_integrador;
 import static com.mycompany.proy_integrador.ResultadoEnum.GANADOR;
 import static com.mycompany.proy_integrador.ResultadoEnum.PERDEDOR;
 import java.io.Serializable;
+import java.util.ArrayList;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -17,7 +18,7 @@ import lombok.Setter;
 @AllArgsConstructor
 public class Partido implements Serializable{
     
-   
+   private Long id;
     private Equipo equipo1;
     private Equipo equipo2;
     private int golesEquipo1;
@@ -31,5 +32,14 @@ public class Partido implements Serializable{
         }else{
         return PERDEDOR;
         }
+    }
+    
+        public static Partido buscarPartidoPorId(ArrayList<Partido> partidos, Long id) {
+        for (Partido p : partidos) {
+            if (p.getId() == id) {
+                return p;
+            }
+        }
+        return null;
     }
 }

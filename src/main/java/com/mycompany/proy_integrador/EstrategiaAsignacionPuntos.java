@@ -9,9 +9,7 @@ package com.mycompany.proy_integrador;
  *
  * @author Usuario
  */
-public enum ResultadoEnum {
-    GANADOR,
-    PERDEDOR,
-    EMPATE
+public interface EstrategiaAsignacionPuntos {
     
+   
 }

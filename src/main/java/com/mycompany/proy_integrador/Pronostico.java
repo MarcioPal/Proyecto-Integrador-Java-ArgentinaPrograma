@@ -18,14 +18,16 @@ import lombok.Setter;
 @NoArgsConstructor
 public class Pronostico implements Serializable{
     
+    private Long id;
     private Partido partido;
     private Equipo equipo;
     private ResultadoEnum resultado;
+    private Participante participante;
     
     public int puntos(){
         int puntos = 0;
         if(partido.resultado(equipo) == resultado){
-            puntos += 1;
+            ++puntos;
         }
         return puntos;
     }

@@ -1,1 +1,10 @@
+com\mycompany\proy_integrador\Pronostico.class
+com\mycompany\proy_integrador\ResultadoEnum.class
 com\mycompany\proy_integrador\Main.class
+com\mycompany\proy_integrador\ObjectInput.class
+com\mycompany\proy_integrador\DB\Conectar.class
+com\mycompany\proy_integrador\ObjectOutput.class
+com\mycompany\proy_integrador\Equipo.class
+com\mycompany\proy_integrador\Participante.class
+com\mycompany\proy_integrador\Partido.class
+com\mycompany\proy_integrador\Ronda.class

@@ -6,6 +6,7 @@
 package com.mycompany.proy_integrador;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -17,7 +18,7 @@ import lombok.Setter;
 @NoArgsConstructor
 public class Ronda implements Serializable{
     private int nro;
-    private Partido[] partidos;
+    private ArrayList<Partido> partidos;
       
     public int puntos(Pronostico pro){
         return 0;
