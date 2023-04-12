@@ -14,11 +14,13 @@ import lombok.Setter;
 @Setter
 @Getter
 @AllArgsConstructor
-public class Equipo implements Serializable {
+public class Equipo {
     
     private Long id;
     private String nombre;
     private String descripcion;
+    public static ArrayList<Equipo> equipos = new ArrayList<>();
+
     
     public Equipo(String nom,String desc){
         this.nombre = nom;

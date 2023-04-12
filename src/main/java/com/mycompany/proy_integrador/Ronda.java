@@ -16,11 +16,13 @@ import lombok.Setter;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Ronda implements Serializable{
+public class Ronda{
     private int nro;
     private ArrayList<Partido> partidos;
+    public static ArrayList<Ronda> rondas = new ArrayList<>();
       
     public int puntos(Pronostico pro){
         return 0;
     }
+    
 }

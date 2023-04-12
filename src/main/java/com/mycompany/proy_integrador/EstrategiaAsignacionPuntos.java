@@ -5,11 +5,13 @@
  */
 package com.mycompany.proy_integrador;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Usuario
  */
 public interface EstrategiaAsignacionPuntos {
     
-   
+   public int obtenerPuntos(ArrayList<Pronostico> pronosticos,ArrayList<Fase> fases);
 }

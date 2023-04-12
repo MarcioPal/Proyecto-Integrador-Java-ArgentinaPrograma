@@ -16,13 +16,14 @@ import lombok.Setter;
 @Setter
 @Getter
 @AllArgsConstructor
-public class Partido implements Serializable{
+public class Partido {
     
    private Long id;
     private Equipo equipo1;
     private Equipo equipo2;
     private int golesEquipo1;
     private int golesEquipo2;
+    public static ArrayList<Partido> partidos = new ArrayList<>();
     
     
     public ResultadoEnum resultado(Equipo equipo){

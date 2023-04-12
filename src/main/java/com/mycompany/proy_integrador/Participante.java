@@ -21,6 +21,7 @@ public class Participante {
     private String nombre;
     private String apellido;
     private int dni;
+    public static  ArrayList<Participante> participantes = new ArrayList<>();
     
     public Participante(String n, String ap, int dni){
         this.nombre = n;

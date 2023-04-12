@@ -1,8 +1,9 @@
  //CARGA DE DATOS EN LA BD SOLO EJECUTAR LA PRIMERA VEZ
-        Connection con = new Conectar().getConexion();
+    Connection con = new Conectar().getConexion();
         Statement st = con.createStatement();
         st.executeUpdate("CREATE TABLE IF NOT EXISTS equipos (id INTEGER PRIMARY KEY AUTO_INCREMENT, nombre VARCHAR(45) NOT NULL,descripcion VARCHAR(45))");
-        st.executeUpdate("CREATE TABLE IF NOT EXISTS rondas (nroRonda INTEGER PRIMARY KEY AUTO_INCREMENT)");
+        st.executeUpdate("CREATE TABLE IF NOT EXISTS fases (nroFase INTEGER PRIMARY KEY AUTO_INCREMENT)");
+        st.executeUpdate("CREATE TABLE IF NOT EXISTS rondas (nroRonda INTEGER PRIMARY KEY AUTO_INCREMENT,nroFase INTEGER, FOREIGN KEY(nroFase) REFERENCES fases(nroFase))");
         st.executeUpdate("CREATE TABLE IF NOT EXISTS partidos (id INTEGER PRIMARY KEY AUTO_INCREMENT, equipo1 INTEGER, FOREIGN KEY (equipo1) REFERENCES equipos(id), equipo2 INTEGER, FOREIGN KEY(equipo2) REFERENCES equipos(id),golesEq1 INTEGER, golesEq2 INTEGER, ronda INTEGER, FOREIGN KEY (ronda) REFERENCES rondas(nroRonda))");
         st.executeUpdate("CREATE TABLE IF NOT EXISTS participantes(id INTEGER PRIMARY KEY AUTO_INCREMENT, nombre VARCHAR(45), apellido VARCHAR(45), dni INTEGER NOT NULL)");
         st.executeUpdate("CREATE TABLE IF NOT EXISTS pronosticos (id INTEGER PRIMARY KEY AUTO_INCREMENT,idPartido INTEGER,FOREIGN KEY(idPartido) REFERENCES partidos(id), idEquipo INTEGER, FOREIGN KEY (idEquipo) REFERENCES equipos(id), resultado VARCHAR(45), idPart INTEGER, FOREIGN KEY(idPart) REFERENCES participantes(id))");
@@ -35,8 +36,9 @@
             pr.executeUpdate();
         } */
         //partidos primer ronda
-        st.executeUpdate("INSERT INTO rondas(nroRonda) VALUES(1)");
-        st.executeUpdate("INSERT INTO rondas(nroRonda) VALUES(2)");
+        st.executeUpdate("INSERT INTO fases(nroFase) VALUES(1)");
+        st.executeUpdate("INSERT INTO rondas(nroRonda,nroFase) VALUES(1,1)");
+        st.executeUpdate("INSERT INTO rondas(nroRonda,nroFase) VALUES(2,1)");
         st.executeUpdate("INSERT INTO partidos(equipo1,equipo2,golesEq1,golesEq2,ronda) VALUES (1,2,5,0,1)");
         st.executeUpdate("INSERT INTO partidos(equipo1,equipo2,golesEq1,golesEq2,ronda) VALUES (1,3,2,0,1)");
         st.executeUpdate("INSERT INTO partidos(equipo1,equipo2,golesEq1,golesEq2,ronda) VALUES (2,3,2,0,1)");
@@ -54,67 +56,67 @@
         pr = con.prepareStatement("INSERT INTO pronosticos(idPartido,idEquipo,resultado,idPart) VALUES (2,1,?,1)");
         pr.setString(1, "EMPATE");
         pr.executeUpdate();
-        
+
         pr = con.prepareStatement("INSERT INTO pronosticos(idPartido,idEquipo,resultado,idPart) VALUES (3,2,?,1)");
-         pr.setString(1,"GANADOR");
+        pr.setString(1, "GANADOR");
         pr.executeUpdate();
-        
+
         pr = con.prepareStatement("INSERT INTO pronosticos(idPartido,idEquipo,resultado,idPart) VALUES (4,2,?,1)");
-         pr.setString(1,"PERDEDOR");
+        pr.setString(1, "PERDEDOR");
         pr.executeUpdate();
-        
+
         pr = con.prepareStatement("INSERT INTO pronosticos(idPartido,idEquipo,resultado,idPart) VALUES (5,1,?,1)");
-         pr.setString(1,"GANADOR");
+        pr.setString(1, "GANADOR");
         pr.executeUpdate();
-        
+
         pr = con.prepareStatement("INSERT INTO pronosticos(idPartido,idEquipo,resultado,idPart) VALUES (6,3,?,1)");
-         pr.setString(1,"PERDEDOR");
+        pr.setString(1, "PERDEDOR");
         pr.executeUpdate();
 
         pr = con.prepareStatement("INSERT INTO pronosticos(idPartido,idEquipo,resultado,idPart) VALUES (1,1,?,2)");
-         pr.setString(1,"PERDEDOR");
+        pr.setString(1, "PERDEDOR");
         pr.executeUpdate();
-        
+
         pr = con.prepareStatement("INSERT INTO pronosticos(idPartido,idEquipo,resultado,idPart) VALUES (2,1,?,2)");
-         pr.setString(1,"GANADOR");
+        pr.setString(1, "GANADOR");
         pr.executeUpdate();
-        
+
         pr = con.prepareStatement("INSERT INTO pronosticos(idPartido,idEquipo,resultado,idPart) VALUES (3,2,?,2)");
-         pr.setString(1,"EMPATE");
+        pr.setString(1, "EMPATE");
         pr.executeUpdate();
-        
+
         pr = con.prepareStatement("INSERT INTO pronosticos(idPartido,idEquipo,resultado,idPart) VALUES (4,2,?,2)");
-         pr.setString(1,"GANADOR");
+        pr.setString(1, "GANADOR");
         pr.executeUpdate();
-        
+
         pr = con.prepareStatement("INSERT INTO pronosticos(idPartido,idEquipo,resultado,idPart) VALUES (5,1,?,2)");
-         pr.setString(1,"GANADOR");
+        pr.setString(1, "GANADOR");
         pr.executeUpdate();
-        
+
         pr = con.prepareStatement("INSERT INTO pronosticos(idPartido,idEquipo,resultado,idPart) VALUES (6,3,?,2)");
-         pr.setString(1,"GANADOR");
+        pr.setString(1, "GANADOR");
         pr.executeUpdate();
 
         pr = con.prepareStatement("INSERT INTO pronosticos(idPartido,idEquipo,resultado,idPart) VALUES (1,1,?,3)");
-         pr.setString(1,"PERDEDOR");
+        pr.setString(1, "PERDEDOR");
         pr.executeUpdate();
-        
+
         pr = con.prepareStatement("INSERT INTO pronosticos(idPartido,idEquipo,resultado,idPart) VALUES (2,1,?,3)");
-         pr.setString(1,"GANADOR");
+        pr.setString(1, "GANADOR");
         pr.executeUpdate();
-        
+
         pr = con.prepareStatement("INSERT INTO pronosticos(idPartido,idEquipo,resultado,idPart) VALUES (3,2,?,3)");
-         pr.setString(1,"GANADOR");
+        pr.setString(1, "GANADOR");
         pr.executeUpdate();
-        
+
         pr = con.prepareStatement("INSERT INTO pronosticos(idPartido,idEquipo,resultado,idPart) VALUES (4,2,?,3)");
-         pr.setString(1,"GANADOR");
+        pr.setString(1, "GANADOR");
         pr.executeUpdate();
-        
+
         pr = con.prepareStatement("INSERT INTO pronosticos(idPartido,idEquipo,resultado,idPart) VALUES (5,1,?,3)");
-         pr.setString(1,"EMPATE");
+        pr.setString(1, "EMPATE");
         pr.executeUpdate();
-        
+
         pr = con.prepareStatement("INSERT INTO pronosticos(idPartido,idEquipo,resultado,idPart) VALUES (6,3,?,3)");
-         pr.setString(1,"PERDEDOR");
+        pr.setString(1, "PERDEDOR");
         pr.executeUpdate();

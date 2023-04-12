@@ -5,8 +5,8 @@
  */
 package com.mycompany.proy_integrador;
 
-import static com.mycompany.proy_integrador.ResultadoEnum.GANADOR;
-import java.io.Serializable;
+
+import java.util.ArrayList;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,13 +16,14 @@ import lombok.Setter;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-public class Pronostico implements Serializable{
+public class Pronostico {
     
     private Long id;
     private Partido partido;
     private Equipo equipo;
     private ResultadoEnum resultado;
     private Participante participante;
+    public static ArrayList<Pronostico> pronosticos = new ArrayList<>();
     
     public int puntos(){
         int puntos = 0;
