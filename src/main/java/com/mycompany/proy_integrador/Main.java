@@ -28,9 +28,8 @@ import java.util.ArrayList;
 public class Main {
 
     public static void main(String[] args) {
-        
-        //TRAIGO TODO LOS DATOS DESDE LA DB Y RECONSTRUYO LOS OBJETOS
 
+        //TRAIGO TODO LOS DATOS DESDE LA DB Y RECONSTRUYO LOS OBJETOS
         try {
 
             Connection con = new Conectar().getConexion();
@@ -53,9 +52,8 @@ public class Main {
             rs = st.executeQuery("SELECT * FROM pronosticos");
 
             while (rs.next()) {
-                pronosticos.add(new Pronostico(rs.getLong("id"), Partido.buscarPartidoPorId(partidos, rs.getLong("idPartido")), buscarEquipoPorId(equipos, rs.getLong("idEquipo")), getResultadoEnum(rs.getString("resultado")), Participante.buscarParticipantePorId(participantes, rs.getLong("idPart"))));
+                pronosticos.add(new Pronostico(rs.getLong("id"), Partido.buscarPartidoPorId(partidos, rs.getLong("idPartido")), buscarEquipoPorId(equipos, rs.getLong("idEquipo")), getResultadoEnum(rs.getString("resultado")), Participante.buscarParticipantePorId(rs.getLong("idPart"))));
             }
-
             rs = st.executeQuery("SELECT * FROM fases");
             while (rs.next()) {
                 fases.add(new Fase(rs.getInt("nroFase")));
@@ -74,9 +72,9 @@ public class Main {
                     }
                 }
                 Ronda ronda = new Ronda(rs.getInt("nroRonda"), partidosRonda);
-                
+
                 for (Fase f : fases) { //Recorro cada fase
-                    if (rs.getInt("nroFase") == f.getNroFase()) { 
+                    if (rs.getInt("nroFase") == f.getNroFase()) {
                         f.getRondas().add(ronda);
                     }
                 }
@@ -89,10 +87,13 @@ public class Main {
         }
 
         //MOSTRAR LOS RESULTADOS DE TODOS LOS PARTIDOS
-        for (Ronda r : rondas) {
-            System.out.println("\nResultados partidos Ronda nro: " + r.getNro() + "\n");
-            for (Partido p : r.getPartidos()) {
-                System.out.println(p.getEquipo1().getNombre() + " " + p.getGolesEquipo1() + "  " + p.getGolesEquipo2() + " " + p.getEquipo2().getNombre());
+        for (Fase f : fases) {
+            System.out.println("Resultados Fase nro: "+f.getNroFase());
+            for (Ronda r : f.getRondas()) {
+                System.out.println("\nResultados partidos Ronda nro: " + r.getNro() + "\n");
+                for (Partido p : r.getPartidos()) {
+                    System.out.println(p.getEquipo1().getNombre() + " " + p.getGolesEquipo1() + "  " + p.getGolesEquipo2() + " " + p.getEquipo2().getNombre());
+                }
             }
         }
 
@@ -104,10 +105,7 @@ public class Main {
                     + "\n Pronostico realizado: " + pro.getEquipo().getNombre() + " " + pro.getResultado());
         }
 
-        System.out.println("\nPuntos por participante\n");
-        for (Participante p : participantes) {
-            System.out.println(p.getNombre() + " " + p.getApellido() + " " + p.getpuntosObtenidos(pronosticos, p) + " puntos");
-        }
+        new CalculadorPuntos().mostrarPuntajes();
 
     }
 

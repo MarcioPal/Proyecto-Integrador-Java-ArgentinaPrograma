@@ -25,4 +25,11 @@ public class Ronda{
         return 0;
     }
     
+    public boolean contienePartido(Partido p){
+        for(Partido par : partidos){
+            if(par.getId() == p.getId()){return true;}
+        }
+        return false;
+    }
+    
 }

@@ -13,5 +13,5 @@ import java.util.ArrayList;
  */
 public interface EstrategiaAsignacionPuntos {
     
-   public int obtenerPuntos(ArrayList<Pronostico> pronosticos,ArrayList<Fase> fases);
+   public int obtenerPuntos(ArrayList<Pronostico> pronosticos, Participante p);
 }

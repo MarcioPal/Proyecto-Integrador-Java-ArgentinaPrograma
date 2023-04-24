@@ -6,6 +6,7 @@
 package com.mycompany.proy_integrador;
 
 import java.util.ArrayList;
+import static com.mycompany.proy_integrador.Fase.fases;
 
 /**
  *
@@ -14,7 +15,7 @@ import java.util.ArrayList;
 public class EstrategiaAsignacionxFase implements EstrategiaAsignacionPuntos {
 
     @Override
-    public int obtenerPuntos(ArrayList<Pronostico> pronosticos, ArrayList<Fase> fases) {
+    public int obtenerPuntos(ArrayList<Pronostico> pronosticos, Participante p) {
 
         int puntosExtra = 0;
         
@@ -22,8 +23,8 @@ public class EstrategiaAsignacionxFase implements EstrategiaAsignacionPuntos {
             int cantAciertosFase = 0;
             for (Ronda r : f.getRondas()) {
                 int cantAciertosRonda = 0;
-                for (Pronostico p : pronosticos) {
-                    if (r.getPartidos().contains(p.getPartido()) && p.getPartido().resultado(p.getEquipo()) == p.getResultado()) {
+                for (Pronostico pro : pronosticos) {
+                    if (pro.getParticipante()== p && r.contienePartido(pro.getPartido()) && pro.getPartido().resultado(pro.getEquipo()).equals(pro.getResultado())) {
                         ++cantAciertosRonda;
                     }
                 }
@@ -33,6 +34,7 @@ public class EstrategiaAsignacionxFase implements EstrategiaAsignacionPuntos {
             }
             if(cantAciertosFase == f.getRondas().size()){
                 ++puntosExtra;
+                System.out.println(cantAciertosFase);
             }
         }
         
